@@ -14,7 +14,8 @@ public class Robot {
     DcMotor leftBack = null;
     DcMotor rightBack = null;
 
-
+    static final double Ticksperrev = 537.7;
+    static final double Wheeldiameter_cm = 10.4;
     /* local OpMode members.*/
     HardwareMap hwMap = null; //hardware map
     private final ElapsedTime period = new ElapsedTime();
