@@ -29,28 +29,10 @@ public class MainTeleOp extends LinearOpMode {
             turnRight = gamepad1.right_trigger;
             turnLeft = gamepad1.left_trigger;
 
-            drive(forward, stafe, turnRight, turnLeft);
+            robot.drive(forward, stafe, turnRight, turnLeft);
 
         }
     }
 
-    public void drive(double forward, double strafe, double rotateLeft, double rotateRight) {
-        double y = forward;
-        double x = strafe;
-        double rotate = rotateLeft - rotateRight;
-        //Slows speed of wheels
-        double dampening = 1;
 
-        //Calculating the power for the wheels
-        double frontLeftPower = (y + x + rotate) * dampening;
-        double frontRightPower = (y - x - rotate) * dampening;
-        double backLeftPower = (y - x + rotate) * dampening;
-        double backRightPower = (y + x - rotate) * dampening;
-
-        //Set Power
-        robot.leftFront.setPower(frontLeftPower);
-        robot.rightFront.setPower(frontRightPower);
-        robot.leftBack.setPower(backLeftPower);
-        robot.rightBack.setPower(backRightPower);
-    }
 }
