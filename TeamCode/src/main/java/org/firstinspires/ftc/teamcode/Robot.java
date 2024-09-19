@@ -35,6 +35,21 @@ public class Robot {
         rightFront = hwMap.get(DcMotor.class, "rightFront");
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         rightBack = hwMap.get(DcMotor.class, "rightBack");
+
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        //Temporary Directions for drive train, change after testing if needed.
+        leftFront.setDirection(DcMotor.Direction.FORWARD);
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        leftBack.setDirection(DcMotor.Direction.FORWARD);
+        rightBack.setDirection(DcMotor.Direction.REVERSE);
+
+
+        // set all motors to zero power
+        stopDriveTrain();
     }
 
 
@@ -58,7 +73,7 @@ public class Robot {
         rightBack.setPower(backRightPower);
     }
 
-    public void stop() {
+    public void stopDriveTrain() {
         leftFront.setPower(0);
         rightFront.setPower(0);
         leftBack.setPower(0);
