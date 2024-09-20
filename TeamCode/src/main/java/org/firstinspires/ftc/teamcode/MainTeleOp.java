@@ -6,10 +6,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp(name="TeleOp" , group="Linear OpMode")
 
 public class MainTeleOp extends LinearOpMode {
-    double forward = gamepad1.left_stick_y;
-    double strafe = gamepad1.left_stick_x;
-    double turnRight = gamepad1.right_trigger;
-    double turnLeft = gamepad1.left_trigger;
+    float forward = 0;
+    float strafe = 0;
+    float turnRight = 0;
+    float turnLeft = 0;
 
 
     Robot robot = new Robot();  //Using Robot.Java class
@@ -29,7 +29,7 @@ public class MainTeleOp extends LinearOpMode {
             turnRight = gamepad1.right_trigger;
             turnLeft = gamepad1.left_trigger;
 
-            robot.drive(forward, strafe, turnRight, turnLeft);
+            robot.drive(forward, -strafe, -turnRight, -turnLeft);
 
         }
     }
