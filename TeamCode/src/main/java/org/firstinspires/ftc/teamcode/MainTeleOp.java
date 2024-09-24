@@ -29,7 +29,7 @@ public class MainTeleOp extends LinearOpMode {
             turnRight = gamepad1.right_trigger;
             turnLeft = gamepad1.left_trigger;
 
-            robot.drive(forward, -strafe, -turnRight, -turnLeft);
+            robot.drive(forward, -strafe, turnRight, turnLeft);
 
         }
     }

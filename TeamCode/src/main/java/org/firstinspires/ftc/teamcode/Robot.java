@@ -56,9 +56,9 @@ public class Robot {
     public void drive(double forward, double strafe, double rotateLeft, double rotateRight) {
         double y = forward;
         double x = strafe;
-        double rotate = rotateLeft - rotateRight;
+        double rotate = rotateRight - rotateLeft;
         //Slows speed of wheels
-        double dampening = 1;
+        double dampening = .75;
 
         //Calculating the power for the wheels
         double frontLeftPower = (y + x + rotate) * dampening;
