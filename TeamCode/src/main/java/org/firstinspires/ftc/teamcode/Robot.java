@@ -16,6 +16,10 @@ public class Robot {
     DcMotor leftBack = null;
     DcMotor rightBack = null;
 
+
+    Servo forward_s = null;
+    Servo backward_s = null;
+
     IMU imu = null;
 
     static final double Ticksperrev = 537.7;
@@ -40,6 +44,9 @@ public class Robot {
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         rightBack = hwMap.get(DcMotor.class, "rightBack");
 
+        forward_s = hwMap.get(Servo.class, "forward_s");
+        backward_s = hwMap.get(Servo.class, "backward_s");
+
         imu = hwMap.get(IMU.class, "imu");
 
         // Retrieve the IMU from the hardware map
@@ -59,6 +66,9 @@ public class Robot {
         rightFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection(DcMotor.Direction.FORWARD);
         rightBack.setDirection(DcMotor.Direction.REVERSE);
+
+        forward_s.setDirection(Servo.Direction.FORWARD);
+        backward_s.setDirection(Servo.Direction.FORWARD);
 
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
