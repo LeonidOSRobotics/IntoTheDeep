@@ -16,9 +16,15 @@ public class Robot {
     DcMotor leftBack = null;
     DcMotor rightBack = null;
 
+    DcMotor slide = null;
+    DcMotor intakeArm = null;
+
 
     Servo forward_s = null;
     Servo backward_s = null;
+
+    Servo bucket = null;
+    Servo intake = null;
 
     IMU imu = null;
 
@@ -44,8 +50,14 @@ public class Robot {
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         rightBack = hwMap.get(DcMotor.class, "rightBack");
 
+        slide = hwMap.get(DcMotor.class, "slide");
+        intakeArm = hwMap.get(DcMotor.class, "intakeArm")
+
         forward_s = hwMap.get(Servo.class, "forward_s");
         backward_s = hwMap.get(Servo.class, "backward_s");
+
+        bucket = hwMap.get(Servo.class, "bucket");
+        intake = hwMap.get(Servo.class, "intake");
 
         imu = hwMap.get(IMU.class, "imu");
 
@@ -61,14 +73,23 @@ public class Robot {
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intakeArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         //Temporary Directions for drive train, change after testing if needed.
         leftFront.setDirection(DcMotor.Direction.FORWARD);
         rightFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection(DcMotor.Direction.FORWARD);
         rightBack.setDirection(DcMotor.Direction.REVERSE);
 
+        slide.setDirection(DcMotor.Direction.FORWARD);
+        intakeArm.setDirection(DcMotor.Direction.FORWARD);
+
         forward_s.setDirection(Servo.Direction.FORWARD);
         backward_s.setDirection(Servo.Direction.FORWARD);
+
+        bucket.setDirection(Servo.Direction.FORWARD);
+        intake.setDirection(Servo.Direction.FORWARD);
 
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -84,6 +105,9 @@ public class Robot {
 
         // set all motors to zero power
         stopDriveTrain();
+
+        slide.setPower(0);
+        intakeArm.setPower(0);
     }
 
 
