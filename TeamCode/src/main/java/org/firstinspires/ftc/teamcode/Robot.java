@@ -51,7 +51,7 @@ public class Robot {
         rightBack = hwMap.get(DcMotor.class, "rightBack");
 
         slide = hwMap.get(DcMotor.class, "slide");
-        intakeArm = hwMap.get(DcMotor.class, "intakeArm")
+        intakeArm = hwMap.get(DcMotor.class, "intakeArm");
 
         forward_s = hwMap.get(Servo.class, "forward_s");
         backward_s = hwMap.get(Servo.class, "backward_s");
