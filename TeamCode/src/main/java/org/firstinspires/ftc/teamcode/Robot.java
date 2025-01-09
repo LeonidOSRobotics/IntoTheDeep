@@ -102,6 +102,12 @@ public class Robot {
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        // Adding Encoder Functionality for Controlled Movement
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
 
         // set all motors to zero power
         stopDriveTrain();
@@ -130,6 +136,44 @@ public class Robot {
         leftBack.setPower(backLeftPower);
         rightBack.setPower(backRightPower);
     }
+
+    public void moveToPosition(int targetPosition, double power) {
+        // Reset encoders after position movement
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftFront.setTargetPosition(targetPosition);
+        leftBack.setTargetPosition(targetPosition);
+        rightFront.setTargetPosition(targetPosition);
+        rightBack.setTargetPosition(targetPosition);
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(power);
+        leftBack.setPower(power);
+        rightFront.setPower(power);
+        rightBack.setPower(power);
+
+        while (leftFront.isBusy() && leftBack.isBusy() && rightFront.isBusy() && rightBack.isBusy()) {
+            // Wait until the motors reach the target position
+        }
+
+        stopDriveTrain();
+
+
+    }
+
+    public int getTicksPerCm() {
+        double circumference = Math.PI * Wheeldiameter_cm; // Wheel circumference in cm
+        return (int) (Ticksperrev / circumference); // Ticks per cm
+    }
+
+
 
     public void stopDriveTrain() {
         leftFront.setPower(0);
