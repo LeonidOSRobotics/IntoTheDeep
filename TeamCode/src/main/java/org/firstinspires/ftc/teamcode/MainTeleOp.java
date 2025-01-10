@@ -21,18 +21,12 @@ public class MainTeleOp extends LinearOpMode {
     // Create an instance of the Robot class for hardware control
     Robot robot = new Robot();  // Using Robot.Java class to interface with the robot's hardware
 
-    // Adding slide motor definition
-    public DcMotor slide = null;
 
     @Override
     public void runOpMode() {
         // Initialize the robot hardware by calling the init method from the Robot class
         robot.init(hardwareMap);
 
-        // Initialize the slide motor
-        slide = hardwareMap.get(DcMotor.class, "slideMotor");
-        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slide.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the user to start the TeleOp mode (e.g., pressing the "play" button in the FTC Driver Station)
         waitForStart();
@@ -67,9 +61,13 @@ public class MainTeleOp extends LinearOpMode {
 
             // Control the linear slide
             if (gamepad1.a) {
-                robot.slide.setPower(0.1);
+                robot.slide.setPower(0.5);
+                telemetry.addData("A", "Button");
+                telemetry.update();
             } else if (gamepad1.b) {
-                robot.slide.setPower(-1);
+                robot.slide.setPower(-.5);
+                telemetry.addData("B", "Button");
+                telemetry.update();
             } else {
                 robot.slide.setPower(0);
             }
