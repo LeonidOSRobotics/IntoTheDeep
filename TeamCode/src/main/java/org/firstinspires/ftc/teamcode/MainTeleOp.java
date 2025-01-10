@@ -60,16 +60,13 @@ public class MainTeleOp extends LinearOpMode {
             robot.drive(rotForward, rotStrafe, turnRight, turnLeft);
 
             // Control the linear slide
-            if (gamepad1.a) {
-                robot.slide.setPower(0.5);
-                telemetry.addData("A", "Button");
-                telemetry.update();
-            } else if (gamepad1.b) {
-                robot.slide.setPower(-.5);
-                telemetry.addData("B", "Button");
-                telemetry.update();
+
+            if (gamepad1.b) {
+                robot.slide.setPower(1.2);
+            } else if (gamepad1.a) {
+                robot.slide.setPower(-0.75);
             } else {
-                robot.slide.setPower(0);
+                robot.slide.setPower(0.1);
             }
         }
     }
