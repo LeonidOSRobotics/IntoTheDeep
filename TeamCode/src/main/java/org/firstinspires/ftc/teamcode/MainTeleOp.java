@@ -21,6 +21,8 @@ public class MainTeleOp extends LinearOpMode {
     // Create an instance of the Robot class for hardware control
     Robot robot = new Robot();  // Using Robot.Java class to interface with the robot's hardware
 
+    private static final double BUCKET_HOLD_POSITION = 0;
+
     // Adding slide motor definition
     public DcMotor slide = null;
 
@@ -39,6 +41,12 @@ public class MainTeleOp extends LinearOpMode {
 
         // Main control loop that runs while the OpMode is active
         while (opModeIsActive()) {
+
+            if (gamepad1.x) {
+                robot.bucket.setPosition(0.5); // Rotate bucket to a specific position when button X is pressed
+            } else {
+                robot.bucket.setPosition(BUCKET_HOLD_POSITION); // Default position
+
 
             // Reset the robot's yaw (orientation angle) if the "options" button is pressed
             // This functionality allows recalibration of the IMU during operation to correct orientation errors
