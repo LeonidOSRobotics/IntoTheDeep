@@ -175,8 +175,8 @@ public class Robot {
         return (int) (Ticksperrev / circumference); // Ticks per cm
     }
 
-    public double getLinearSlideTicksPerCm() {
-        return (Ticksperrev / WHEEL_CIRCUMFERENCE_CM) * NUMBER_OF_WHEELS; // New formula considering multiple wheels
+    public int getLinearSlideTicksPerCm() {
+        return (int) (Ticksperrev / WHEEL_CIRCUMFERENCE_CM) * NUMBER_OF_WHEELS; // New formula considering multiple wheels
     }
 
 
