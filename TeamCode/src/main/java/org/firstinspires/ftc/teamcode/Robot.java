@@ -30,6 +30,8 @@ public class Robot {
 
     static final double Ticksperrev = 537.7;
     static final double Wheeldiameter_cm = 10.4;
+    static final double WHEEL_CIRCUMFERENCE_CM = 14.2; // Circumference of the wheel in cm
+    static final int NUMBER_OF_WHEELS = 3; // Three wheels in the system
     /* local OpMode members.*/
     HardwareMap hwMap = null; //hardware map
     private final ElapsedTime period = new ElapsedTime();
@@ -171,6 +173,10 @@ public class Robot {
     public int getTicksPerCm() {
         double circumference = Math.PI * Wheeldiameter_cm; // Wheel circumference in cm
         return (int) (Ticksperrev / circumference); // Ticks per cm
+    }
+
+    public double getLinearSlideTicksPerCm() {
+        return (Ticksperrev / WHEEL_CIRCUMFERENCE_CM) * NUMBER_OF_WHEELS; // New formula considering multiple wheels
     }
 
 
