@@ -32,6 +32,16 @@ public class Robot {
     static final double Wheeldiameter_cm = 10.4;
     static final double WHEEL_CIRCUMFERENCE_CM = 14.2; // Circumference of the wheel in cm
     static final int NUMBER_OF_WHEELS = 3; // Three wheels in the system
+
+    private double kP = 0.01; // Proportional control constant
+    private double kI = 0.001; // Integral control constant
+    private double kD = 0.005; // Derivative control constant
+
+    private double previousError = 0;
+    private double totalError = 0;
+    private ElapsedTime pidTimer = new ElapsedTime();
+
+
     /* local OpMode members.*/
     HardwareMap hwMap = null; //hardware map
     private final ElapsedTime period = new ElapsedTime();
