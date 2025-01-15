@@ -21,11 +21,9 @@ public class MainTeleOp extends LinearOpMode {
     // Create an instance of the Robot class for hardware control
     Robot robot = new Robot();  // Using Robot.Java class to interface with the robot's hardware
 
-    private static final double BUCKET_HOLD_POSITION = 0;
 
-    // Adding slide motor definition
-    public DcMotor slide = null;
-
+    private static final int BUCKET_HOLD_POSITION = 0;
+    private static final int BUCKET_DUMP_POSITION = 0.5;
     //SLide Positions in cm
     private static final int SLIDE_BASE_POSITION = 0;
     private static final int SLIDE_BASKET = 53;
@@ -37,26 +35,11 @@ public class MainTeleOp extends LinearOpMode {
         // Initialize the robot hardware by calling the init method from the Robot class
         robot.init(hardwareMap);
 
-        // Initialize the slide motor
-        slide = hardwareMap.get(DcMotor.class, "slideMotor");
-        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slide.setDirection(DcMotor.Direction.FORWARD);
-
-        // Set up the slide motor for encoder-based control
-        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
         // Wait for the user to start the TeleOp mode (e.g., pressing the "play" button in the FTC Driver Station)
         waitForStart();
 
         // Main control loop that runs while the OpMode is active
         while (opModeIsActive()) {
-
-            if (gamepad1.x) {
-                robot.bucket.setPosition(0.5); // Rotate bucket to a specific position when button X is pressed
-            } else {
-                robot.bucket.setPosition(BUCKET_HOLD_POSITION); // Default position
-
 
             // Reset the robot's yaw (orientation angle) if the "options" button is pressed
             // This functionality allows recalibration of the IMU during operation to correct orientation errors
@@ -84,7 +67,12 @@ public class MainTeleOp extends LinearOpMode {
             robot.drive(rotForward, rotStrafe, turnRight, turnLeft);
 
 
-            //Control the slide position
+            if (gamepad1.x) {
+                robot.bucket.setPosition(BUCKET_DUMP_POSITION); // Rotate bucket to a specific position when button X is pressed
+            } else {
+                robot.bucket.setPosition(BUCKET_HOLD_POSITION); // Default position
+
+                //Control the slide position
             if (gamepad1.dpad_up) {
                 //move to top position
                 slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_HIGHBAR));
@@ -102,7 +90,7 @@ public class MainTeleOp extends LinearOpMode {
                 slide.setPower(0.1);
             }
 
-            // Control the linear slide
+            //  Linear slide Overide
             if (gamepad1.b) {
                 robot.slide.setPower(1.2);
             } else if (gamepad1.a) {
