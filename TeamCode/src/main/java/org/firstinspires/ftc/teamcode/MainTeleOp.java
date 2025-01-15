@@ -26,6 +26,12 @@ public class MainTeleOp extends LinearOpMode {
     // Adding slide motor definition
     public DcMotor slide = null;
 
+    //SLide Positions in cm
+    private static final int SLIDE_BASE_POSITION = 0;
+    private static final int SLIDE_BASKET = 53;
+    private static final int SLIDE_LOWBAR = 16;
+    private static final int SLIDE_HIGHBAR = 51;
+
     @Override
     public void runOpMode() {
         // Initialize the robot hardware by calling the init method from the Robot class
@@ -35,6 +41,10 @@ public class MainTeleOp extends LinearOpMode {
         slide = hardwareMap.get(DcMotor.class, "slideMotor");
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide.setDirection(DcMotor.Direction.FORWARD);
+
+        // Set up the slide motor for encoder-based control
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Wait for the user to start the TeleOp mode (e.g., pressing the "play" button in the FTC Driver Station)
         waitForStart();
@@ -72,6 +82,25 @@ public class MainTeleOp extends LinearOpMode {
             // Pass the adjusted movement values and turn inputs to the robot's drivetrain
             // The drive method in the Robot class handles motor power distribution for movement
             robot.drive(rotForward, rotStrafe, turnRight, turnLeft);
+
+
+            //Control the slide position
+            if (gamepad1.dpad_up) {
+                //move to top position
+                slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_HIGHBAR));
+                slide.setPower(0.75);
+            } else if (gamepad1.dpad_left) {
+                //move to middle position
+                slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_BASKET));
+                slide.setPower(0.75);
+            } else if (gamepad1.dpad_down) {
+                //move to bottom position
+                slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_LOWBAR));
+                slide.setPower(0.75);
+            } else {
+                //hold position
+                slide.setPower(0.1);
+            }
 
             // Control the linear slide
             if (gamepad1.b) {
