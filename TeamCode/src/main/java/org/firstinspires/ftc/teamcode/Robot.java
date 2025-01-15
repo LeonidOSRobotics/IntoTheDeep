@@ -34,12 +34,6 @@ public class Robot {
     static final int NUMBER_OF_WHEELS = 3; // Three wheels in the system
 
     private double kP = 0.01; // Proportional control constant
-    private double kI = 0.001; // Integral control constant
-    private double kD = 0.005; // Derivative control constant
-
-    private double previousError = 0;
-    private double totalError = 0;
-    private ElapsedTime pidTimer = new ElapsedTime();
 
 
     /* local OpMode members.*/
@@ -127,6 +121,15 @@ public class Robot {
         slide.setPower(0);
         intakeArm.setPower(0);
     }
+
+    public void proportionalControlMotor(DcMotor motor, int targetPosition) {
+        double error = targetPosition - motor.getCurrentPosition();
+
+        // Calculate the proportional output
+        double output = kP * error;
+
+        // Set motor power with proportional control
+        motor.setPower(output);
 
 
     public void drive(double forward, double strafe, double rotateLeft, double rotateRight) {
