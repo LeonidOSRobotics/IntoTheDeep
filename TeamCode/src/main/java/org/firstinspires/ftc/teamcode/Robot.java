@@ -113,7 +113,7 @@ public class Robot {
 
         // Set up the slide motor for encoder-based control
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
@@ -132,7 +132,7 @@ public class Robot {
 
         // Set motor power with proportional control
         motor.setPower(output);
-
+    }
 
     public void drive(double forward, double strafe, double rotateLeft, double rotateRight) {
         double y = forward;
@@ -185,13 +185,13 @@ public class Robot {
 
     }
 
-    public int getTicksPerCm() {
+    public int getTicksPerCm(double cm) {
         double circumference = Math.PI * Wheeldiameter_cm; // Wheel circumference in cm
-        return (int) (Ticksperrev / circumference); // Ticks per cm
+        return (int) ((Ticksperrev / circumference) * cm); // Ticks per cm
     }
 
-    public int getLinearSlideTicksPerCm() {
-        return (int) (Ticksperrev / WHEEL_CIRCUMFERENCE_CM) * NUMBER_OF_WHEELS; // New formula considering multiple wheels
+    public int getLinearSlideTicksPerCm(double cm) {
+        return (int) ((Ticksperrev / WHEEL_CIRCUMFERENCE_CM) * NUMBER_OF_WHEELS* cm); // New formula considering multiple wheels
     }
 
 
