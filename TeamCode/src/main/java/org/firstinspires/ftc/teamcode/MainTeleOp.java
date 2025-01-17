@@ -22,8 +22,8 @@ public class MainTeleOp extends LinearOpMode {
     Robot robot = new Robot();  // Using Robot.Java class to interface with the robot's hardware
 
 
-    private static final int BUCKET_HOLD_POSITION = 0;
-    private static final int BUCKET_DUMP_POSITION = 0.5;
+    private static final double BUCKET_HOLD_POSITION = 0.3;
+    private static final double BUCKET_DUMP_POSITION = 0;
     //SLide Positions in cm
     private static final int SLIDE_BASE_POSITION = 0;
     private static final int SLIDE_BASKET = 53;
@@ -71,33 +71,34 @@ public class MainTeleOp extends LinearOpMode {
                 robot.bucket.setPosition(BUCKET_DUMP_POSITION); // Rotate bucket to a specific position when button X is pressed
             } else {
                 robot.bucket.setPosition(BUCKET_HOLD_POSITION); // Default position
-
-                //Control the slide position
-            if (gamepad1.dpad_up) {
-                //move to top position
-                slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_HIGHBAR));
-                slide.setPower(0.75);
-            } else if (gamepad1.dpad_left) {
-                //move to middle position
-                slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_BASKET));
-                slide.setPower(0.75);
-            } else if (gamepad1.dpad_down) {
-                //move to bottom position
-                slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_LOWBAR));
-                slide.setPower(0.75);
-            } else {
-                //hold position
-                slide.setPower(0.1);
             }
+                //Control the slide position
+                /*if (gamepad1.dpad_up) {
+                    //move to top position
+                    robot.slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_HIGHBAR));
+                    robot.slide.setPower(0.75);
+                } else if (gamepad1.dpad_left) {
+                    //move to middle position
+                    robot.slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_BASKET));
+                    robot.slide.setPower(0.75);
+                } else if (gamepad1.dpad_down) {
+                    //move to bottom position
+                    robot.slide.setTargetPosition(robot.getLinearSlideTicksPerCm(SLIDE_LOWBAR));
+                    robot.slide.setPower(0.75);
+                } else {
+                    //hold position
+                    robot.slide.setPower(0.1);
+                }*/
 
-            //  Linear slide Overide
-            if (gamepad1.b) {
-                robot.slide.setPower(1.2);
-            } else if (gamepad1.a) {
-                robot.slide.setPower(-0.75);
-            } else {
-                robot.slide.setPower(0.1);
+                //  Linear slide Overide
+                if (gamepad1.b) {
+                    robot.slide.setPower(.3);
+                } else if (gamepad1.a) {
+                    robot.slide.setPower(-0.75);
+                } else {
+                    robot.slide.setPower(0);
+                }
             }
         }
     }
-}
+
