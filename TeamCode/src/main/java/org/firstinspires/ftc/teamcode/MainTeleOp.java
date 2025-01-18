@@ -88,9 +88,29 @@ public class MainTeleOp extends LinearOpMode {
                 } else {
                     //hold position
                     robot.slide.setPower(0.1);
-                }*/
+                }
 
-                //  Linear slide Overide
+                if (gamepad1.dpad_up) {
+
+                    robot.intake.setPosition(0.7);
+
+                }  else if (gamepad1.dpad_down) {
+
+                    robot.intake.setPosition(0);
+
+                } else {
+                    robot.intakeArm.setPower(0);
+                }
+
+                if (-gamepad1.right_stick_y < 0) {
+                    robot.intakeArm.setPower(gamepad1.right_stick_y * .3);
+                } else if (-gamepad1.right_stick_y > 0) {
+                    robot.intakeArm.setPower(gamepad1.right_stick_y * .9);
+
+                }
+*/
+
+            //  Linear slide Overide
                 if (gamepad1.b) {
                     robot.slide.setPower(.3);
                 } else if (gamepad1.a) {

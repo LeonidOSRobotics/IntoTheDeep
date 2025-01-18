@@ -115,7 +115,7 @@ public class Robot {
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
+        intake.setPosition(.8);
 
         // set all motors to zero power
         stopDriveTrain();
